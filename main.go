@@ -73,9 +73,13 @@ func (w World) Step() {
 }
 
 func main() {
-	// Define the dimensions of the world
-	width := 40
-	height := 20
+	var width, height int
+
+	fmt.Print("Enter the width of the world: ")
+	fmt.Scan(&width)
+
+	fmt.Print("Enter the height of the world: ")
+	fmt.Scan(&height)
 
 	// Create a new world with random initial values
 	world := make(World, height)
