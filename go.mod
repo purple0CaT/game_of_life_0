@@ -1,4 +1,4 @@
-module lifegame
+module github.com/purple0cat/game_of_life_0
 
 go 1.21.1
 

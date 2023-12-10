@@ -10,14 +10,26 @@ import (
 type World [][]bool
 
 // Method to print the world
-func (w World) Print() {
+func getTheme(theme string, val bool) int {
+	res := "⬜️"
+
+	if theme == "night" {
+		if !val {
+			res = "⬛️"
+		}
+	} else {
+		if val {
+			res = "⬛️"
+		}
+	}
+	fmt.Print(res)
+	return 0
+}
+
+func (w World) Print(theme string) {
 	for _, row := range w {
 		for _, cell := range row {
-			if cell {
-				fmt.Print("🟩 ")
-			} else {
-				fmt.Print("🟫 ")
-			}
+			getTheme(theme, !!cell)
 		}
 		fmt.Println()
 	}
@@ -74,12 +86,16 @@ func (w World) Step() {
 
 func main() {
 	var width, height int
+	var theme string
 
 	fmt.Print("Enter the width of the world: ")
 	fmt.Scan(&width)
 
 	fmt.Print("Enter the height of the world: ")
 	fmt.Scan(&height)
+
+	fmt.Print("Enter the theme. (day/night): ")
+	fmt.Scan(&theme)
 
 	// Create a new world with random initial values
 	world := make(World, height)
@@ -92,7 +108,7 @@ func main() {
 
 	// Simulate the game
 	for {
-		world.Print()
+		world.Print(theme)
 		time.Sleep(100 * time.Millisecond)
 		world.Step()
 		fmt.Print("\033[H\033[2J")
